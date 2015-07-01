@@ -13,4 +13,7 @@ predict(fit1, newx = x[1, ], s = 0.005)
 
 # Actually, this version can't do this either
 predict(fit1, newx = as.matrix(x[1, ]), s =  0.005)
+
+# You have to do this, which is weird
+predict(fit1, newx = t(as.matrix(x[1, ])), s =  0.005)
 ```
