@@ -1,6 +1,11 @@
-plotCoef=function(beta,norm,lambda,df,dev,label=FALSE,xvar=c("norm","lambda","dev"),xlab=iname,ylab="Coefficients",...){
+plotCoef=function(beta,norm,lambda,df,dev,label=FALSE,xvar=c("norm","lambda","dev"),
+                  coefs, xlab=iname,ylab="Coefficients",...){
   ##beta should be in "dgCMatrix" format
-  which=nonzeroCoef(beta)
+  if (length(coefs) == 0) {
+    which=nonzeroCoef(beta)
+  } else {
+    which=coefs
+  }
   nwhich=length(which)
   switch(nwhich+1,#we add one to make switch work
          "0"={
@@ -9,11 +14,12 @@ plotCoef=function(beta,norm,lambda,df,dev,label=FALSE,xvar=c("norm","lambda","de
          },
          "1"=warning("1 or less nonzero coefficients; glmnet plot is not meaningful")
          )
-  beta=as.matrix(beta[which,,drop=FALSE])
+  beta_drop=as.matrix(beta[which,,drop=FALSE])
+  beta_nonzero=as.matrix(beta[nonzeroCoef(beta),,drop=FALSE])
   xvar=match.arg(xvar)
   switch(xvar,
     "norm"={
-      index=if(missing(norm))apply(abs(beta),2,sum)else norm
+      index=if(missing(norm))apply(abs(beta_nonzero),2,sum)else norm
       iname="L1 Norm"
       approx.f=1
     },
@@ -31,8 +37,8 @@ plotCoef=function(beta,norm,lambda,df,dev,label=FALSE,xvar=c("norm","lambda","de
   dotlist=list(...)
   type=dotlist$type
   if(is.null(type))
-    matplot(index,t(beta),lty=1,xlab=xlab,ylab=ylab,type="l",...)
-  else matplot(index,t(beta),lty=1,xlab=xlab,ylab=ylab,...)
+    matplot(index,t(beta_drop),lty=1,xlab=xlab,ylab=ylab,type="l",...)
+  else matplot(index,t(beta_drop),lty=1,xlab=xlab,ylab=ylab,...)
   atdf=pretty(index)
   ### compute df by interpolating to df at next smaller lambda
   ### thanks to Yunyang Qian
