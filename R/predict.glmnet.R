@@ -1,8 +1,12 @@
 predict.glmnet=function(object,newx,s=NULL,type=c("link","response","coefficients","nonzero","class"),exact=FALSE,offset,...){
  type=match.arg(type)
   if(missing(newx)){
-    if(!match(type,c("coefficients","nonzero"),FALSE))stop("You need to supply a value for 'newx'")
-     }
+    if(!match(type,c("coefficients","nonzero"),FALSE)){
+      stop("You need to supply a value for 'newx'")
+    }
+  } else if (class(newx) != "matrix") {  
+    newx <- t(as.matrix(newx))   
+  }
   if(exact&&(!is.null(s))){
 ###we augment the lambda sequence with the new values, if they are different,and refit the model using update
     lambda=object$lambda
