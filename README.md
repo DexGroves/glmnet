@@ -17,3 +17,7 @@ predict(fit1, newx = as.matrix(x[1, ]), s =  0.005)
 # You have to do this, which is weird
 predict(fit1, newx = t(as.matrix(x[1, ])), s =  0.005)
 ```
+
+Some other things which might be worth doing:
+* A glm-style formula and dataframe interface
+* Coefficient profile plots with a legend and coefficient selection
