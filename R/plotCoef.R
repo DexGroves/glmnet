@@ -54,7 +54,7 @@ plotCoef=function(beta,norm,lambda,df,dev,label=FALSE,xvar=c("norm","lambda","de
      pos=2
    }
    xpos=rep(xpos,nnz)
-   ypos=beta[,ncol(beta)]
+   ypos=beta_drop[,ncol(beta_drop)]
    text(xpos,ypos,paste(which),cex=.5,pos=pos)
  }
          
