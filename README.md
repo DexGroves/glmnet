@@ -1,5 +1,7 @@
 # glmnet
-Elastic nets in R, where you can score on one row.
+Elastic nets in R, where you can score on one row. Also planning to add some new features.
+
+Originally developed by Jerome Friedman, Trevor Hastie, Noah Simon, Rob Tibshirani & others.
 
 CRAN glmnet can't do this:
 
