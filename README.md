@@ -3,6 +3,8 @@ Elastic nets in R, with some improvements.
 
 Originally developed by Jerome Friedman, Trevor Hastie, Noah Simon, Rob Tibshirani & others.
 
+CRAN glmnet changed cross validation so that the lambda vector is recomputed for each fold. I am not convinced that this is a good idea, and can lead to errors on small samples.
+
 CRAN glmnet can't score on a single row:
 
 ```R
